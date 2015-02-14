@@ -2,9 +2,11 @@
 
 import curses
 import socket
+import time
 
 #initialize UDP Socket
-UDP_IP = "192.168.1.145"	#static IP of raspberry pi
+#UDP_IP = "192.168.1.145"	#static IP of raspberry pi
+UDP_IP = "127.0.0.1"		#for testing purposes on same computer
 UDP_PORT = 5005
 print "UDP target IP:", UDP_IP
 print "UDP target port:", UDP_PORT
@@ -29,14 +31,17 @@ while (True):
 		curses.endwin()
 		break
 	elif inputKey == curses.KEY_RIGHT:
-		MESSAGE = "RIGHT"
+		MESSAGE = "R"
 	elif inputKey == curses.KEY_LEFT:
-		MESSAGE = "LEFT"		
+		MESSAGE = "L"		
 	elif inputKey == curses.KEY_UP:
-		MESSAGE = "UP"		
+		MESSAGE = "F"		
 	elif inputKey == curses.KEY_DOWN:
-		MESSAGE = "DOWN"
-
+		MESSAGE = "B"
+	
+	#tick = time.clock()
 	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+	#wait for usb serial response
+	#dT = tock - tick
 
-	time.sleep(.5)
+	time.sleep(.05)

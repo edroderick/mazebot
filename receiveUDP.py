@@ -1,4 +1,6 @@
 import socket
+import time
+import pickle
 
 UDP_IP_IN = "127.0.0.1"
 UDP_IP_OUT = "127.0.0.1"
@@ -13,6 +15,50 @@ while True:
 	data, addr = sock_in.recvfrom(1024) # buffer size is 1024 bytes
 	print "received message:", data
 	
-	sock_out.sendto(data, (UDP_IP_OUT, UDP_PORT_OUT))
+	if (data == "F"):
+		name = "RW"
+		mode = "rotation"
+		value = 1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		name = "LW"
+		mode = "rotation"
+		value = 1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+	if (data == "B"):
+		name = "RW"
+		mode = "rotation"
+		value = -1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		name = "LW"
+		mode = "rotation"
+		value = -1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+	if (data == "L"):
+		name = "RW"
+		mode = "rotation"
+		value = 1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		name = "LW"
+		mode = "rotation"
+		value = -1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+	if (data == "R"):
+		name = "RW"
+		mode = "rotation"
+		value = -1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		name = "LW"
+		mode = "rotation"
+		value = 1
+		message = [name, mode, value]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+
 
 	time.sleep(.01)
