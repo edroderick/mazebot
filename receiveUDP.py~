@@ -17,48 +17,52 @@ while True:
 	
 	if (data == "F"):
 		name = "RW"
-		mode = "rotation"
+		mode = "wheel"
 		value = 1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 		name = "LW"
-		mode = "rotation"
+		mode = "wheel"
 		value = 1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 	if (data == "B"):
 		name = "RW"
-		mode = "rotation"
+		mode = "wheel"
 		value = -1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 		name = "LW"
-		mode = "rotation"
+		mode = "wheel"
 		value = -1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 	if (data == "L"):
 		name = "RW"
-		mode = "rotation"
+		mode = "wheel"
 		value = 1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 		name = "LW"
-		mode = "rotation"
+		mode = "wheel"
 		value = -1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 	if (data == "R"):
 		name = "RW"
-		mode = "rotation"
+		mode = "wheel"
 		value = -1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 		name = "LW"
-		mode = "rotation"
+		mode = "wheel"
 		value = 1
 		message = [name, mode, value]
 		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-
+	if (data == "S"):
+		message = ["RW", "wheel", 0]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		message = ["LW", "wheel", 0]
+		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
 
 	time.sleep(.01)

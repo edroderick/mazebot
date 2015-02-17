@@ -5,7 +5,8 @@ import socket
 import time
 
 #initialize UDP Socket
-#UDP_IP = "192.168.1.145"	#static IP of raspberry pi
+#UDP_IP = "192.168.1.145"	#static IP of raspberry pi (ethernet)
+#UDP_IP - "192.168.1.245"	#static IP of raspberry pi on wireless (LLabs)
 UDP_IP = "127.0.0.1"		#for testing purposes on same computer
 UDP_PORT = 5005
 print "UDP target IP:", UDP_IP
@@ -17,7 +18,10 @@ stdscr = curses.initscr()
 curses.noecho()
 curses.cbreak()
 stdscr.keypad(True)
-stdscr.nodelay(False)
+curses.halfdelay(1)
+
+
+lastmessage = "0"
 
 # Get the current feed-forward (state) 
 while (True):
@@ -37,11 +41,14 @@ while (True):
 	elif inputKey == curses.KEY_UP:
 		MESSAGE = "F"		
 	elif inputKey == curses.KEY_DOWN:
-		MESSAGE = "B"
-	
+		MESSAGE = "B"	
+	else:
+		MESSAGE = "S"
+
 	#tick = time.clock()
-	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+	if (lastmessage != MESSAGE):
+		sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
 	#wait for usb serial response
 	#dT = tock - tick
-
-	time.sleep(.05)
+	lastmessage = MESSAGE
+	time.sleep(.01)

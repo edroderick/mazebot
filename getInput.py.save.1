@@ -45,10 +45,10 @@ while (True):
 	else:
 		MESSAGE = "S"
 
-	#tick = time.clock()
+	#tick = time.clock(
 	if (lastmessage != MESSAGE):
 		sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
 	#wait for usb serial response
 	#dT = tock - tick
 	lastmessage = MESSAGE
-	time.sleep(.01)
+	#time.sleep(.01)

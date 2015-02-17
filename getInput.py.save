@@ -18,10 +18,7 @@ stdscr = curses.initscr()
 curses.noecho()
 curses.cbreak()
 stdscr.keypad(True)
-curses.halfdelay(1)
-
-
-lastmessage = "0"
+stdscr.nodelay(False)
 
 # Get the current feed-forward (state) 
 while (True):
@@ -41,14 +38,11 @@ while (True):
 	elif inputKey == curses.KEY_UP:
 		MESSAGE = "F"		
 	elif inputKey == curses.KEY_DOWN:
-		MESSAGE = "B"	
-	else:
-		MESSAGE = "S"
-
+		MESSAGE = "B"
+	print MESSAGE
 	#tick = time.clock()
-	if (lastmessage != MESSAGE):
-		sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+	sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
 	#wait for usb serial response
 	#dT = tock - tick
-	lastmessage = MESSAGE
-	time.sleep(.01)
+
+	time.sleep(.05)
