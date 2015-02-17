@@ -5,9 +5,8 @@ import socket
 import time
 
 #initialize UDP Socket
-#UDP_IP = "192.168.1.145"	#static IP of raspberry pi (ethernet)
-#UDP_IP - "192.168.1.245"	#static IP of raspberry pi on wireless (LLabs)
-UDP_IP = "127.0.0.1"		#for testing purposes on same computer
+UDP_IP - "192.168.1.245"	#static IP of raspberry pi
+#UDP_IP = "127.0.0.1"		#for testing purposes on same computer
 UDP_PORT = 5005
 print "UDP target IP:", UDP_IP
 print "UDP target port:", UDP_PORT
