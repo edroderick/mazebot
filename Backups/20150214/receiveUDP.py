@@ -2,8 +2,8 @@ import socket
 import time
 import pickle
 
-UDP_IP_IN = "192.168.1.245"
-UDP_IP_OUT = "192.168.1.245"
+UDP_IP_IN = "127.0.0.1"
+UDP_IP_OUT = "127.0.0.1"
 UDP_PORT_IN = 5005
 UDP_PORT_OUT = 5006
 
