@@ -1,14 +1,17 @@
 import socket
 import time
 import pickle
+import serial
 
 UDP_IP_IN = "192.168.1.245"
-UDP_IP_OUT = "192.168.1.245"
+#UDP_IP_OUT = "192.168.1.245"
 UDP_PORT_IN = 5005
-UDP_PORT_OUT = 5006
+#UDP_PORT_OUT = 5006
+
+ser = serial.Serial('/dev/ttyAMA0', 57600)
 
 sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP from Control CPU
-sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP to serial interface process
+#sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP to serial interface process
 sock_in.bind((UDP_IP_IN, UDP_PORT_IN))
 
 while True:
@@ -16,53 +19,13 @@ while True:
 	print "received message:", data
 	
 	if (data == "F"):
-		name = "RW"
-		mode = "wheel"
-		value = 1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-		name = "LW"
-		mode = "wheel"
-		value = 1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		ser.write(chr(70))
 	if (data == "B"):
-		name = "RW"
-		mode = "wheel"
-		value = -1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-		name = "LW"
-		mode = "wheel"
-		value = -1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		ser.write(chr(66))
 	if (data == "L"):
-		name = "RW"
-		mode = "wheel"
-		value = 1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-		name = "LW"
-		mode = "wheel"
-		value = -1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		ser.write(chr(76))
 	if (data == "R"):
-		name = "RW"
-		mode = "wheel"
-		value = -1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-		name = "LW"
-		mode = "wheel"
-		value = 1
-		message = [name, mode, value]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
+		ser.write(chr(82))
 	if (data == "S"):
-		message = ["RW", "wheel", 0]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-		message = ["LW", "wheel", 0]
-		sock_out.sendto(pickle.dumps(message), (UDP_IP_OUT, UDP_PORT_OUT))
-
-	time.sleep(.01)
+		ser.write(chr(83))
+	time.sleep(.05)
