@@ -3,15 +3,15 @@ import time
 import pickle
 import serial
 
-UDP_IP = "127.0.0.1"
+UDP_IP = "192.168.1.245"
 UDP_PORT = 5006
 
-LW_ID = 2
-RW_ID = 1
-wheel_mode = 0
-position_mode = 1
+LW_ID = "2"
+RW_ID = "1"
+wheel_mode = "0"
+position_mode = "1"
 
-#ser = serial.Serial('/dev/ttyAMA0', 57600)
+ser = serial.Serial('/dev/ttyAMA0', 9600)
 #ser = serial.Serial('/dev/tty/ACM0', 9600)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP from receive function CPU
@@ -23,8 +23,8 @@ while True:
 
 	L = pickle.loads(data)
 	L2 = pickle.loads(data2)
-	VALUE_1 = L[2]
-	VALUE_2 = L2[2]
+	VALUE_1 = str(L[2])
+	VALUE_2 = str(L2[2])
 
 	if (L[0] == 'LW'):
 		ID_1 = LW_ID
@@ -42,7 +42,7 @@ while True:
 		MODE_2 = wheel_mode
 	if (L2[1] == 'position'):
 		MODE_2 = position_mode
-	packet = [ID_1,MODE_1,VALUE_1, ID_2, MODE_2, VALUE_2]
+	packet = ID_1 + MODE_1 + VALUE_1 + ID_2 + MODE_2 + VALUE_2
 	print packet
-#	ser.write(packet)	
-	time.sleep(.01)
+	ser.write(packet)	
+	time.sleep(.05)
