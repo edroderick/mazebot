@@ -3,14 +3,14 @@ import time
 import pickle
 import serial
 
-#UDP_IP_IN = "192.168.1.245"
-UDP_IP_IN = "127.0.0.1"
+UDP_IP_IN = "192.168.1.245"
+#UDP_IP_IN = "127.0.0.1"
 #UDP_IP_OUT = "192.168.1.245"
 UDP_PORT_IN = 5005
 #UDP_PORT_OUT = 5006
 
-#ser = serial.Serial('/dev/ttyAMA0', 57600)
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyAMA0', 57600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
 sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP from Control CPU
 #sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP to serial interface process

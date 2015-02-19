@@ -21,7 +21,7 @@ int maxspeed = 400;
 void setup() {
   // Set up the pin 10 as an output:
   pinMode(BOARD_LED_PIN, OUTPUT);
-  //Serial3.begin(57600);
+  Serial3.begin(57600);
   Dxl.begin(3);
   Dxl.wheelMode(1);
   Dxl.wheelMode(2);
@@ -30,14 +30,14 @@ void setup() {
 
 void loop() {
  
-//  if(Serial3.available() > 0){
-  if(SerialUSB.available() > 0){
+  if(Serial3.available() > 0){
+  //if(SerialUSB.available() > 0){
     char inData[20];
-//  while(Serial3.available()>0){
-    while(SerialUSB.available()>0){
+    while(Serial3.available()>0){
+    //while(SerialUSB.available()>0){
       if(index < 19){
-        //inChar = Serial3.read(); //read a character
-        inChar = SerialUSB.read(); //read a character
+        inChar = Serial3.read(); //read a character
+        //inChar = SerialUSB.read(); //read a character
         inData[index] = inChar;
         index++;
         inData[index] = '\0';
@@ -48,7 +48,7 @@ void loop() {
   SerialUSB.print(inData[0]);
   
   if(inData[0] == char(70)){
-    SerialUSB.print('test');
+    digitalWrite(BOARD_LED_PIN, HIGH);
     Dxl.goalSpeed(1, maxspeed | 0x400); 
     Dxl.goalSpeed(2, maxspeed);
   }
